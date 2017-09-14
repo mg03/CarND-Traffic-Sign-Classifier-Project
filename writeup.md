@@ -151,14 +151,14 @@ The incorrect prediction is due to the fact that the shape of Pedestrain image f
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-1  Actual Label: 16 TopGuess:-Label: 16 Prob%: 100.0 2ndGuess:-Label: 9 Prob%: 0.0 3rdGuess:-Label: 10 Prob%: 0.0
-2  Actual Label: 29 TopGuess:-Label: 29 Prob%: 99.0 2ndGuess:-Label: 28 Prob%: 1.33 3rdGuess:-Label: 23 Prob%: 0.0
-3  Actual Label: 27 TopGuess:-Label: 18 Prob%: 99.0 2ndGuess:-Label: 27 Prob%: 1.34 3rdGuess:-Label: 26 Prob%: 0.01
-4  Actual Label: 12 TopGuess:-Label: 12 Prob%: 100.0 2ndGuess:-Label: 25 Prob%: 0.0 3rdGuess:-Label: 40 Prob%: 0.0
-5  Actual Label: 25 TopGuess:-Label: 25 Prob%: 100.0 2ndGuess:-Label: 22 Prob%: 0.0 3rdGuess:-Label: 11 Prob%: 0.0
-6  Actual Label: 14 TopGuess:-Label: 14 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 38 Prob%: 0.0
-7  Actual Label: 33 TopGuess:-Label: 33 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 35 Prob%: 0.0
-8  Actual Label: 13 TopGuess:-Label: 13 Prob%: 100.0 2ndGuess:-Label: 12 Prob%: 0.0 3rdGuess:-Label: 15 Prob%: 0.0
+- 1  Actual Label: 16 TopGuess:-Label: 16 Prob%: 100.0 2ndGuess:-Label: 9 Prob%: 0.0 3rdGuess:-Label: 10 Prob%: 0.0
+- 2  Actual Label: 29 TopGuess:-Label: 29 Prob%: 99.0 2ndGuess:-Label: 28 Prob%: 1.33 3rdGuess:-Label: 23 Prob%: 0.0
+- 3  Actual Label: 27 TopGuess:-Label: 18 Prob%: 99.0 2ndGuess:-Label: 27 Prob%: 1.34 3rdGuess:-Label: 26 Prob%: 0.01
+- 4  Actual Label: 12 TopGuess:-Label: 12 Prob%: 100.0 2ndGuess:-Label: 25 Prob%: 0.0 3rdGuess:-Label: 40 Prob%: 0.0
+- 5  Actual Label: 25 TopGuess:-Label: 25 Prob%: 100.0 2ndGuess:-Label: 22 Prob%: 0.0 3rdGuess:-Label: 11 Prob%: 0.0
+- 6  Actual Label: 14 TopGuess:-Label: 14 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 38 Prob%: 0.0
+- 7  Actual Label: 33 TopGuess:-Label: 33 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 35 Prob%: 0.0
+- 8  Actual Label: 13 TopGuess:-Label: 13 Prob%: 100.0 2ndGuess:-Label: 12 Prob%: 0.0 3rdGuess:-Label: 15 Prob%: 0.0
 
 As seen above , line 3 , Actual Label is 27 and the model predicts 18 as its top guess and 27 with a probability of 1.3 % ... so all in all a decent predictor seeing that I used the raw images as is without any preprocessing except for gray scaling and rotation for data extension. Point being this model can handle poor image quality and detect with a decent accuracy.
 
