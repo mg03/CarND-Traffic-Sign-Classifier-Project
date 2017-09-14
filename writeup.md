@@ -14,7 +14,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./output_images/training_set_histogram.jpg
-[image2]: ./output_images/grayscale.jpg
+[image2]: ./output_images/original_and_gray.jpg
 [image3]: ./output_images/rotated.jpg
 [image4]: ./output_images/web_8_german_signs.jpg
 [image5]: ./output_images/softmax1.jpg
