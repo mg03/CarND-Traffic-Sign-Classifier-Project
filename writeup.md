@@ -16,7 +16,7 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/training_set_histogram.jpg
 [image2]: ./output_images/grayscale.jpg
 [image3]: ./output_images/rotated.jpg
-[image4]: ./output_images/web_8_german_signs.jpg
+[image4]: ./output_images/web_signs.jpg
 [image5]: ./output_images/softmax1.jpg
 [image6]: ./output_images/softmax2.jpg
 
@@ -69,7 +69,7 @@ Here is an example of an original image and an augmented image:
 ![alt text][image3] 
 
 
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.)
 
 My final model consisted of the following layers:
 
@@ -82,13 +82,14 @@ My final model consisted of the following layers:
 | Convolution 5x5	  | 1x1 stride, VALID padding, outputs 10x10x16 	|
 | RELU					    |												|
 | Max pooling	      | 2x2 stride,  outputs 5x5x16			|
-| Flatten			      | Ouput = 400
-| Fully connected		| Input = 400. Output = 120       									|
+| Flatten			      | Input = (5, 5, 16) Ouput = 400
+| Dropout           | Keep Prob = 0.5
+| Fully connected	1	| Input = 400 Output = 120       									|
 | RELU
 | Dropout           | Keep Prob = 0.5
-| Fully connected		| Input = 120. Output = 84      									|
+| Fully connected	2	| Input = 120 Output = 84      									|
 | RELU
-| Fully connected		| Input = 84. Output = 43   
+| Fully connected	3	| Input = 84 Output = 43   
 
 
 
@@ -120,7 +121,7 @@ If a well known architecture was chosen:
   Honestly, I used LeNet since there was a course Lab using LeNet and I was familiar with it
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
-  As you can see that the trainingg loss and validation loss keep decreasing over the epochs (no overfitting of data) and the validation accuracy is 94.8% and the test accuracy is 93.9%.
+  As you can see that the training loss and validation loss keep decreasing over the epochs (no overfitting of data) and the validation accuracy is 94.8% and the test accuracy is 93.9%.
   So we have a pretty decent model.
  
 
@@ -128,39 +129,58 @@ If a well known architecture was chosen:
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are 8 German traffic signs that I found on the web:
+Here are traffic signs that I found on the web:
 
 ![alt text][image4]
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+The images choosen in the unseen dataset consists of 9 traffic sign images collected from the internet. When selecting these examples following two criteria were used:
+
+- 1 Test the ability of the model to recognized already familiar traffic signs. 
+- 2 Two of the examples were selected to measure the generalization ability of the network. These 2 examples were not represented in the training set. So obviously, the model may not correctly classify these examples, but guesses should be sensible.
+
+
+
+####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set 
 
 The provided images were 
 
-outside_labels = [16, 29, 27, 12, 25, 14, 33, 13]
+outside_labels_desc = ['16-Veh over 3.5 mtons prohibited', '29 - Bicycles crossing',
+                       'Unknown -   Elderly Crossing', '12 - Priority road', '25 - Road work', '14 - Stop', '33 - Turn right ahead', '13 - Yield', 
+                       'Unkonwn to me']
 
+Labels 200 and 400 are used for images with no labels in the training set
 
 Here are the results of the prediction:
 
-Inferred classes: [ 16.  29.  18.  12.  25.  14.  33.  13.]
+Inferred classes: [ 16.  29.  28.  12.  25.  14.  33.  13.  23.]
 
-Prediction Accuracy = 0.875
+Prediction Accuracy = 0.778
 
-The model was able to correctly guess 7 of the 8 traffic signs, which gives an accuracy of 87.5%. This compares favorably to the accuracy on the test set of 93.9%
+The model was able to correctly guess 7 of the 9 traffic signs, and gives an accuracy of 77.8%.
 
-The incorrect prediction is due to the fact that the shape of Pedestrain image for original label of 27 and shape of General Caution image for predicted label of 18 are close enough to be incorrectly predicted. If more training is done then the prediction would be accurate.
+But 7 out of the 9 are signs which were included in the training model , so actually we get a 7 on 7 for known labels/signs i.e. 100% prediction. This compares favorably to the accuracy on the test set of 93.9%
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-1  Actual Label: 16 TopGuess:-Label: 16 Prob%: 100.0 2ndGuess:-Label: 9 Prob%: 0.0 3rdGuess:-Label: 10 Prob%: 0.0
-2  Actual Label: 29 TopGuess:-Label: 29 Prob%: 99.0 2ndGuess:-Label: 28 Prob%: 1.33 3rdGuess:-Label: 23 Prob%: 0.0
-3  Actual Label: 27 TopGuess:-Label: 18 Prob%: 99.0 2ndGuess:-Label: 27 Prob%: 1.34 3rdGuess:-Label: 26 Prob%: 0.01
-4  Actual Label: 12 TopGuess:-Label: 12 Prob%: 100.0 2ndGuess:-Label: 25 Prob%: 0.0 3rdGuess:-Label: 40 Prob%: 0.0
-5  Actual Label: 25 TopGuess:-Label: 25 Prob%: 100.0 2ndGuess:-Label: 22 Prob%: 0.0 3rdGuess:-Label: 11 Prob%: 0.0
-6  Actual Label: 14 TopGuess:-Label: 14 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 38 Prob%: 0.0
-7  Actual Label: 33 TopGuess:-Label: 33 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 35 Prob%: 0.0
-8  Actual Label: 13 TopGuess:-Label: 13 Prob%: 100.0 2ndGuess:-Label: 12 Prob%: 0.0 3rdGuess:-Label: 15 Prob%: 0.0
+- 1  Actual Label: 16 TopGuess:-Label: 16 Prob%: 100.0 2ndGuess:-Label: 9 Prob%: 0.0 3rdGuess:-Label: 10 Prob%: 0.0
+- 2  Actual Label: 29 TopGuess:-Label: 29 Prob%: 99.0 2ndGuess:-Label: 28 Prob%: 1.33 3rdGuess:-Label: 23 Prob%: 0.0
+- 3  Actual Label: 200 TopGuess:-Label: 28 Prob%: 100.0 2ndGuess:-Label: 29 Prob%: 0.2 3rdGuess:-Label: 30 Prob%: 0.07
+- 4  Actual Label: 12 TopGuess:-Label: 12 Prob%: 100.0 2ndGuess:-Label: 25 Prob%: 0.0 3rdGuess:-Label: 40 Prob%: 0.0
+- 5  Actual Label: 25 TopGuess:-Label: 25 Prob%: 100.0 2ndGuess:-Label: 22 Prob%: 0.0 3rdGuess:-Label: 11 Prob%: 0.0
+- 6  Actual Label: 14 TopGuess:-Label: 14 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 38 Prob%: 0.0
+- 7  Actual Label: 33 TopGuess:-Label: 33 Prob%: 100.0 2ndGuess:-Label: 17 Prob%: 0.0 3rdGuess:-Label: 35 Prob%: 0.0
+- 8  Actual Label: 13 TopGuess:-Label: 13 Prob%: 100.0 2ndGuess:-Label: 12 Prob%: 0.0 3rdGuess:-Label: 15 Prob%: 0.0
+- 9  Actual Label: 400 TopGuess:-Label: 23 Prob%: 26.0 2ndGuess:-Label: 12 Prob%: 19.75 3rdGuess:-Label: 41 Prob%: 12.18
 
-As seen above , line 3 , Actual Label is 27 and the model predicts 18 as its top guess and 27 with a probability of 1.3 % ... so all in all a decent predictor seeing that I used the raw images as is without any preprocessing except for gray scaling and rotation for data extension. Point being this model can handle poor image quality and detect with a decent accuracy.
+
+The first unkown image is a sign For Elderly Crossing, the model classfies it as 28 (Children Crossing) with 100% probabity. So atleast it got the part that the unknown sign is a Crossing type sign
+
+The second unknown image is something that I dont know. Hence I was interested in seeing what the
+model predicts. The model predicts it to be 23 (Slipper Road) with probability 26% , 12 (Priority Road) with 20% probability, 41(End of no passing) with 13% probability. I believe if the image would be without its square/rectangle white board background, the model would be able to atleast tell us that the sign is of Regulatory signs type .
+German signs have the following broad types: Regulatory signs, Speed limit signs, Right-of-way signs, Railway crossing signs, Warning signs, Supplemental signs.  
+[Source](http://www.gettingaroundgermany.info/zeichen.shtml
+
+Softmax Probabilities are as follows:
 
 ![alt text][image5]
 ![alt text][image6]
